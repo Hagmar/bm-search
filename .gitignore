@@ -2,3 +2,6 @@
 *.o
 
 a3search
+
+# Test cases
+booknmail/*

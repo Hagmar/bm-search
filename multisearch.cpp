@@ -1,3 +1,4 @@
+#include <fstream>
 #include "multisearch.h"
 #include "searchquery.h"
 
@@ -8,7 +9,15 @@ MultiSearch::MultiSearch(int size, char** queries){
     }
 }
 
-// TODO
-void MultiSearch::performSearch(char*){
+void MultiSearch::performSearch(char* fileName){
+    char fileBuffer[BUFFERSIZE];
+    std::ifstream in(fileName);
+
+    in.read(fileBuffer, BUFFERSIZE);
+    unsigned int charactersRead = in.gcount();
+    executeSearches(fileBuffer, charactersRead);
+}
+
+void MultiSearch::executeSearches(char *textBuffer, unsigned int characters){
     return;
 }

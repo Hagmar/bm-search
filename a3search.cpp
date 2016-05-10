@@ -32,6 +32,7 @@ int main(int argc, char** argv){
         if (std::string(argv[3]) == "-s"){
             std::stringstream(argv[4]) >> sSize;
             argv += 2;
+            argc -= 2;
         }
         MultiSearch* searchQueries = new MultiSearch(argc-3, argv+3);
 

@@ -3,11 +3,13 @@
 
 SearchQuery::SearchQuery(char* p){
     pattern = p;
+    length = strlen(pattern);
     createBCTable();
+    status.occurrences = 0;
+    status.index = 0;
 }
 
 void SearchQuery::createBCTable(){
-    unsigned int length = strlen(pattern);
     for (int i = 0; i < ALPHABET_SIZE; i++){
         bcTable[i] = new short[length];
         memset(bcTable[i], -1, length*sizeof(unsigned short));
@@ -21,4 +23,22 @@ void SearchQuery::createBCTable(){
         }
         bcTable[c][i+1] = i;
     }
+}
+
+void SearchQuery::search(char* text, unsigned int textLength){
+    unsigned int i = 0;
+    unsigned int j;
+    while (i <= textLength-length){
+        j = length-1;
+        while (j != -1 && pattern[j] == text[i+j]){
+            j--;
+        }
+        if (j == -1){
+            status.occurrences++;
+            i++;
+        } else {
+            i += j-bcTable[pattern[j]][j];
+        }
+    }
+    status.index = textLength-i;
 }

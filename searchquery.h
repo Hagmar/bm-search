@@ -10,7 +10,15 @@ class SearchQuery {
         void createBCTable();
 
     public:
+        struct searchStatus {
+            unsigned int occurrences;
+            int index;
+        } status;
+
         char* pattern;
+        unsigned int length;
+
+        void search(char*, unsigned int);
 
         SearchQuery(char*);
         ~SearchQuery();

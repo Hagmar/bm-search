@@ -7,6 +7,8 @@ class MultiSearch {
     public:
         SearchQuery** searches;
 
+        void performSearch(char*);
+
         MultiSearch(int, char**);
         ~MultiSearch();
 };

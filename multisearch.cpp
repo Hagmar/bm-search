@@ -7,3 +7,8 @@ MultiSearch::MultiSearch(int size, char** queries){
         searches[i] = new SearchQuery(queries[i]);
     }
 }
+
+// TODO
+void MultiSearch::performSearch(char*){
+    return;
+}

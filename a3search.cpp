@@ -12,12 +12,13 @@ void performSearch(MultiSearch* ms, char* folder, char* indexFile){
     if ((dir = opendir(folder)) != NULL){
         std::string fileNameString;
         char* fileName;
+        float occurrences;
         while ((ent = readdir(dir)) != NULL){
             fileName = ent->d_name;
             fileNameString = std::string(fileName);
             if (fileNameString != "." && fileNameString != ".."){
                 fileNameString = folderString + fileNameString;
-                ms->performSearch(fileNameString.c_str());
+                occurrences = ms->performSearch(fileNameString.c_str());
             }
         }
         closedir(dir);

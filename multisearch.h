@@ -6,15 +6,17 @@
 #define BUFFERSIZE 4096
 
 class MultiSearch {
+    private:
+        void executeSearches(char*, unsigned int);
+        unsigned int getBufferOffset();
+        float sumOccurrences();
+        void resetSearches();
+
     public:
         unsigned int number;
         SearchQuery** searches;
 
-        unsigned int performSearch(const char*);
-        void executeSearches(char*, unsigned int);
-        unsigned int getBufferOffset();
-        unsigned int sumOccurrences();
-        void resetSearches();
+        float performSearch(const char*);
 
         MultiSearch(int, char**);
         ~MultiSearch();

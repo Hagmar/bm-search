@@ -11,7 +11,7 @@ MultiSearch::MultiSearch(int n, char** queries){
     }
 }
 
-void MultiSearch::performSearch(const char* fileName){
+unsigned int MultiSearch::performSearch(const char* fileName){
     char fileBuffer[BUFFERSIZE];
     std::ifstream in(fileName);
 
@@ -23,6 +23,9 @@ void MultiSearch::performSearch(const char* fileName){
         bufferOffset = getBufferOffset();
         memcpy(fileBuffer, fileBuffer-bufferOffset, bufferOffset);
     }
+    unsigned int occurrences = sumOccurrences();
+    resetSearches();
+    return occurrences;
 }
 
 void MultiSearch::executeSearches(char *textBuffer, unsigned int characters){
@@ -46,4 +49,22 @@ unsigned int MultiSearch::getBufferOffset(){
         searches[i]->status.index = maxIndex-searches[i]->status.index;
     }
     return maxIndex;
+}
+
+unsigned int MultiSearch::sumOccurrences(){
+    unsigned int occurrences = 0;
+    for (unsigned int i = 0; i < number; i++){
+        if (!searches[i]->status.occurrences){
+            return 0;
+        }
+        occurrences += searches[i]->status.occurrences;
+    }
+    return occurrences;
+}
+
+void MultiSearch::resetSearches(){
+    for (unsigned int i = 0; i < number; i++){
+        searches[i]->status.index = 0;
+        searches[i]->status.occurrences = 0;
+    }
 }

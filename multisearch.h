@@ -10,9 +10,11 @@ class MultiSearch {
         unsigned int number;
         SearchQuery** searches;
 
-        void performSearch(const char*);
+        unsigned int performSearch(const char*);
         void executeSearches(char*, unsigned int);
         unsigned int getBufferOffset();
+        unsigned int sumOccurrences();
+        void resetSearches();
 
         MultiSearch(int, char**);
         ~MultiSearch();

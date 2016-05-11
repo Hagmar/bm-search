@@ -27,6 +27,9 @@ void SearchQuery::createBCTable(){
 }
 
 void SearchQuery::search(char* text, unsigned int textLength){
+    if (textLength < length){
+        return;
+    }
     unsigned int i = status.index;
     unsigned int j;
     while (i <= textLength-length){

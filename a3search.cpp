@@ -7,6 +7,8 @@
 void performSearch(MultiSearch* ms, char* folder, char* indexFile){
     DIR *dir;
     dirent *ent;
+    std::string folderString(folder);
+    folderString += "/";
     if ((dir = opendir(folder)) != NULL){
         std::string fileNameString;
         char* fileName;
@@ -14,7 +16,8 @@ void performSearch(MultiSearch* ms, char* folder, char* indexFile){
             fileName = ent->d_name;
             fileNameString = std::string(fileName);
             if (fileNameString != "." && fileNameString != ".."){
-                ms->performSearch(fileName);
+                fileNameString = folderString + fileNameString;
+                ms->performSearch(fileNameString.c_str());
             }
         }
         closedir(dir);

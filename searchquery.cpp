@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cstring>
 #include "searchquery.h"
 
@@ -37,7 +38,7 @@ void SearchQuery::search(char* text, unsigned int textLength){
             status.occurrences++;
             i++;
         } else {
-            i += j-bcTable[pattern[j]][j];
+            i += j-bcTable[text[i+j]][j];
         }
     }
     status.index = textLength-i;

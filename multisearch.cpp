@@ -29,7 +29,7 @@ float MultiSearch::performSearch(const char* fileName){
         memcpy(fileBuffer, fileBuffer+BUFFERSIZE-bufferOffset, bufferOffset);
         in.read(fileBuffer+bufferOffset, BUFFERSIZE-bufferOffset);
         unsigned int charactersRead = in.gcount();
-        for (i = charactersRead+bufferOffset-1; i >= bufferOffset; i--){
+        for (i = bufferOffset; i < charactersRead+bufferOffset; i++){
             fileBuffer[i] = trans[fileBuffer[i]];
         }
         executeSearches(fileBuffer, charactersRead+bufferOffset);

@@ -20,7 +20,7 @@ class SearchQuery {
 
         void search(char*, unsigned int);
 
-        SearchQuery(char*);
+        SearchQuery(char*, char[]);
         ~SearchQuery();
 };
 

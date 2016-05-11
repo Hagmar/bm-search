@@ -2,9 +2,13 @@
 #include <cstring>
 #include "searchquery.h"
 
-SearchQuery::SearchQuery(char* p){
+SearchQuery::SearchQuery(char* p, char trans[ALPHABET_SIZE]){
     pattern = p;
-    length = strlen(pattern);
+    unsigned int i;
+    for (i = 0; pattern[i]; i++){
+        pattern[i] = trans[pattern[i]];
+    }
+    length = i;
     createBCTable();
     status.occurrences = 0;
     status.index = 0;

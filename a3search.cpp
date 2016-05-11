@@ -56,7 +56,7 @@ void printResults(std::vector<std::pair<float, char*> > vector){
     std::sort(vector.begin(), vector.end(), filesorter);
     std::vector<std::pair<float, char*> >::iterator it;
     for (it = vector.begin(); it != vector.end(); it++){
-        std::cout << (*it).second << " (" << (*it).first << ")" << std::endl;
+        std::cout << (*it).second << std::endl;
     }
 }
 

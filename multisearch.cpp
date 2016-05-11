@@ -19,9 +19,9 @@ float MultiSearch::performSearch(const char* fileName){
     while (!in.eof()){
         in.read(fileBuffer+bufferOffset, BUFFERSIZE-bufferOffset);
         unsigned int charactersRead = in.gcount();
-        executeSearches(fileBuffer, charactersRead);
+        executeSearches(fileBuffer, charactersRead+bufferOffset);
         bufferOffset = getBufferOffset();
-        memcpy(fileBuffer, fileBuffer-bufferOffset, bufferOffset);
+        memcpy(fileBuffer, fileBuffer+BUFFERSIZE-bufferOffset, bufferOffset);
     }
     float occurrences = sumOccurrences();
     resetSearches();

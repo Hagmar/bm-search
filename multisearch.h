@@ -7,15 +7,17 @@
 
 class MultiSearch {
     private:
+        unsigned int number;
+        SearchQuery** searches;
+        char trans[ALPHABET_SIZE];
+
+        void buildTransTable();
         void executeSearches(char*, unsigned int);
         unsigned int getBufferOffset();
         float sumOccurrences();
         void resetSearches();
 
     public:
-        unsigned int number;
-        SearchQuery** searches;
-
         float performSearch(const char*);
 
         MultiSearch(int, char**);

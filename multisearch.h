@@ -10,7 +10,7 @@ class MultiSearch {
         unsigned int number;
         SearchQuery** searches;
 
-        void performSearch(char*);
+        void performSearch(const char*);
         void executeSearches(char*, unsigned int);
         unsigned int getBufferOffset();
 

@@ -3,14 +3,15 @@
 #include "multisearch.h"
 #include "searchquery.h"
 
-MultiSearch::MultiSearch(int number, char** queries){
+MultiSearch::MultiSearch(int n, char** queries){
+    number = n;
     searches = new SearchQuery*[number];
     for (int i = 0; i < number; i++){
         searches[i] = new SearchQuery(queries[i]);
     }
 }
 
-void MultiSearch::performSearch(char* fileName){
+void MultiSearch::performSearch(const char* fileName){
     char fileBuffer[BUFFERSIZE];
     std::ifstream in(fileName);
 
@@ -25,7 +26,9 @@ void MultiSearch::performSearch(char* fileName){
 }
 
 void MultiSearch::executeSearches(char *textBuffer, unsigned int characters){
-    return;
+    for (unsigned int i = 0; i < number; i++){
+        searches[i]->search(textBuffer, characters);
+    }
 }
 
 unsigned int MultiSearch::getBufferOffset(){

@@ -3,13 +3,14 @@
 
 #include "searchquery.h"
 
-#define BUFFERSIZE 4096
+#define BUFFERSIZE 65536
 
 class MultiSearch {
     private:
         unsigned int number;
         SearchQuery** searches;
         char trans[ALPHABET_SIZE];
+        char fileBuffer[BUFFERSIZE];
 
         void buildTransTable();
         void executeSearches(char*, unsigned int);

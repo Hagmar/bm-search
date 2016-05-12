@@ -20,7 +20,6 @@ void MultiSearch::buildTransTable(){
 }
 
 float MultiSearch::performSearch(const char* fileName){
-    char fileBuffer[BUFFERSIZE];
     std::ifstream in(fileName);
 
     unsigned int bufferOffset = 0;

@@ -16,8 +16,8 @@ SearchQuery::SearchQuery(char* p, char trans[ALPHABET_SIZE]){
 
 void SearchQuery::createBCTable(){
     for (int i = 0; i < ALPHABET_SIZE; i++){
-        bcTable[i] = new short[length];
-        memset(bcTable[i], -1, length*sizeof(unsigned short));
+        bcTable[i] = new int[length];
+        memset(bcTable[i], -1, length*sizeof(unsigned int));
     }
 
     char c;
@@ -40,8 +40,8 @@ void SearchQuery::search(char* text, unsigned int textLength, char trans[ALPHABE
     while (i <= textLength-length){
         j = length-1;
         // Skip-loop to skip to skip unnecessary comparisons
-        bcTable[pattern[length-1]][length-1] = -textLength-1;
-        while ((i += j-bcTable[trans[text[i+length-1]]][length-1]) < textLength-length);
+        bcTable[pattern[j]][j] = -textLength-1;
+        while ((i += j-bcTable[text[i+j]][j]) < textLength-length);
 
         // Check if end of text has been reached
         if (i < textLength+1){
@@ -49,7 +49,7 @@ void SearchQuery::search(char* text, unsigned int textLength, char trans[ALPHABE
         }
 
         // Restore BC-table and i
-        bcTable[pattern[length-1]][length-1] = tempBCEntry;
+        bcTable[pattern[length-1]][j] = tempBCEntry;
         i -= j + textLength + 1;
 
         // Check for match at position i

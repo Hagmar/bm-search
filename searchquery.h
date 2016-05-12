@@ -5,7 +5,7 @@
 
 class SearchQuery {
     private:
-        short* bcTable[ALPHABET_SIZE];
+        int* bcTable[ALPHABET_SIZE];
 
         void createBCTable();
 

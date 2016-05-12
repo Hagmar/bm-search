@@ -30,7 +30,7 @@ void SearchQuery::createBCTable(){
     }
 }
 
-void SearchQuery::search(char* text, unsigned int textLength){
+void SearchQuery::search(char* text, unsigned int textLength, char trans[ALPHABET_SIZE]){
     if (textLength < length){
         return;
     }
@@ -41,7 +41,7 @@ void SearchQuery::search(char* text, unsigned int textLength){
         j = length-1;
         // Skip-loop to skip to skip unnecessary comparisons
         bcTable[pattern[j]][j] = -textLength-1;
-        while ((i += j-bcTable[text[i+j]][j]) < textLength-length);
+        while ((i += j-bcTable[trans[text[i+j]]][j]) < textLength-length);
 
         // Check if end of text has been reached
         if (i < textLength+1){
@@ -53,14 +53,14 @@ void SearchQuery::search(char* text, unsigned int textLength){
         i -= j + textLength + 1;
 
         // Check for match at position i
-        while (j != -1 && pattern[j] == text[i+j]){
+        while (j != -1 && pattern[j] == trans[text[i+j]]){
             j--;
         }
         if (j == -1){
             status.occurrences++;
             i++;
         } else {
-            i += j-bcTable[text[i+j]][j];
+            i += j-bcTable[trans[text[i+j]]][j];
         }
     }
     status.index = textLength-i;

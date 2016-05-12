@@ -13,7 +13,7 @@ class MultiSearch {
         char fileBuffer[BUFFERSIZE];
 
         void buildTransTable();
-        void executeSearches(char*, unsigned int);
+        void executeSearches(char*, unsigned int, char[ALPHABET_SIZE]);
         unsigned int getBufferOffset();
         float sumOccurrences();
         void resetSearches();

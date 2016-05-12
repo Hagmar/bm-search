@@ -36,8 +36,23 @@ void SearchQuery::search(char* text, unsigned int textLength){
     }
     unsigned int i = status.index;
     unsigned int j;
+    unsigned int tempBCEntry = bcTable[pattern[length-1]][length-1];
     while (i <= textLength-length){
         j = length-1;
+        // Skip-loop to skip to skip unnecessary comparisons
+        bcTable[pattern[length-1]][length-1] = -textLength-1;
+        while ((i += j-bcTable[text[i+length-1]][length-1]) < textLength-length);
+
+        // Check if end of text has been reached
+        if (i < textLength+1){
+            break;
+        }
+
+        // Restore BC-table and i
+        bcTable[pattern[length-1]][length-1] = tempBCEntry;
+        i -= j + textLength + 1;
+
+        // Check for match at position i
         while (j != -1 && pattern[j] == text[i+j]){
             j--;
         }

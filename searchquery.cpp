@@ -41,7 +41,7 @@ void SearchQuery::search(char* text, unsigned int textLength, char trans[ALPHABE
         j = length-1;
         // Skip-loop to skip to skip unnecessary comparisons
         bcTable[pattern[j]][j] = -textLength-1;
-        while ((i += j-bcTable[text[i+j]][j]) < textLength-length);
+        while ((i += j-bcTable[trans[text[i+j]]][j]) < textLength-length);
 
         // Check if end of text has been reached
         if (i < textLength+1){

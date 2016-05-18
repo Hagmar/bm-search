@@ -37,9 +37,9 @@ float MultiSearch::performSearch(const char* fileName){
     return occurrences;
 }
 
-void MultiSearch::executeSearches(char *textBuffer, unsigned int characters, char trans[ALPHABET_SIZE]){
+void MultiSearch::executeSearches(char *textBuffer, unsigned int characters, unsigned char trans[ALPHABET_SIZE]){
     for (unsigned int i = 0; i < number; i++){
-        searches[i]->search(textBuffer, characters, trans);
+        searches[i]->search((unsigned char*) textBuffer, characters, trans);
     }
 }
 

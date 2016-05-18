@@ -2,7 +2,7 @@
 #include <cstring>
 #include "searchquery.h"
 
-SearchQuery::SearchQuery(char* p, char trans[ALPHABET_SIZE]){
+SearchQuery::SearchQuery(char* p, unsigned char trans[ALPHABET_SIZE]){
     pattern = p;
     unsigned int i;
     for (i = 0; pattern[i]; i++){
@@ -30,7 +30,7 @@ void SearchQuery::createBCTable(){
     }
 }
 
-void SearchQuery::search(char* text, unsigned int textLength, char trans[ALPHABET_SIZE]){
+void SearchQuery::search(unsigned char* text, unsigned int textLength, unsigned char trans[ALPHABET_SIZE]){
     if (textLength < length){
         return;
     }

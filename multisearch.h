@@ -9,11 +9,11 @@ class MultiSearch {
     private:
         unsigned int number;
         SearchQuery** searches;
-        char trans[ALPHABET_SIZE];
+        unsigned char trans[ALPHABET_SIZE];
         char fileBuffer[BUFFERSIZE];
 
         void buildTransTable();
-        void executeSearches(char*, unsigned int, char[ALPHABET_SIZE]);
+        void executeSearches(char*, unsigned int, unsigned char[ALPHABET_SIZE]);
         unsigned int getBufferOffset();
         float sumOccurrences();
         void resetSearches();

@@ -18,9 +18,9 @@ class SearchQuery {
         char* pattern;
         unsigned int length;
 
-        void search(char*, unsigned int);
+        void search(unsigned char*, unsigned int, unsigned char[ALPHABET_SIZE]);
 
-        SearchQuery(char*, char[]);
+        SearchQuery(char*, unsigned char[]);
         ~SearchQuery();
 };
 

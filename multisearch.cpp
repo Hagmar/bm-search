@@ -33,12 +33,8 @@ float MultiSearch::performSearch(const char* fileName){
         memcpy(fileBuffer, fileBuffer+BUFFERSIZE-bufferOffset, bufferOffset);
         in.read(fileBuffer+bufferOffset, BUFFERSIZE-bufferOffset);
         unsigned int charactersRead = in.gcount();
-        // Make the file contents lower case
-        for (i = bufferOffset; i < charactersRead+bufferOffset; i++){
-            fileBuffer[i] = trans[fileBuffer[i]];
-        }
         // Execute all the searches on the current buffer
-        executeSearches(fileBuffer, charactersRead+bufferOffset);
+        executeSearches(fileBuffer, charactersRead+bufferOffset, trans);
         bufferOffset = getBufferOffset();
     }
     float occurrences = avgOccurrences();
@@ -48,9 +44,9 @@ float MultiSearch::performSearch(const char* fileName){
 }
 
 // Run all searches
-void MultiSearch::executeSearches(char *textBuffer, unsigned int characters){
+void MultiSearch::executeSearches(char *textBuffer, unsigned int characters, unsigned char trans[ALPHABET_SIZE]){
     for (unsigned int i = 0; i < number; i++){
-        searches[i]->search(textBuffer, characters);
+        searches[i]->search((unsigned char*) textBuffer, characters, trans);
     }
 }
 

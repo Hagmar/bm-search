@@ -14,6 +14,9 @@ SearchQuery::SearchQuery(char* p, char trans[ALPHABET_SIZE]){
     status.index = 0;
 }
 
+// Generate the bad-character table for the search pattern
+// Uses the full, two-dimensional table of the Boyer-Moore algorithm, not the
+// one-dimensional one of the simplified Boyer-Moore-Horspool algorithm
 void SearchQuery::createBCTable(){
     for (int i = 0; i < ALPHABET_SIZE; i++){
         bcTable[i] = new int[length];
@@ -30,6 +33,7 @@ void SearchQuery::createBCTable(){
     }
 }
 
+// Perform Boyer-Moore search on the file contents
 void SearchQuery::search(char* text, unsigned int textLength){
     if (textLength < length){
         return;
@@ -63,5 +67,6 @@ void SearchQuery::search(char* text, unsigned int textLength){
             i += j-bcTable[text[i+j]][j];
         }
     }
+    // Maintain next matching position
     status.index = textLength-i;
 }

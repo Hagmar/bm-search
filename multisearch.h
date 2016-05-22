@@ -15,7 +15,7 @@ class MultiSearch {
         void buildTransTable();
         void executeSearches(char*, unsigned int);
         unsigned int getBufferOffset();
-        float sumOccurrences();
+        float avgOccurrences();
         void resetSearches();
 
     public:

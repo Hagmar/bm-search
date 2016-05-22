@@ -8,6 +8,8 @@
 #include "a3search.h"
 #include "multisearch.h"
 
+// Performs all the search queries contained in ms on the folder folder
+// Returns a vector with pairs of frequencies of terms and files
 std::vector<std::pair<float, char*> > performSearch(MultiSearch* ms,
         char* folder, char* indexFile){
     DIR *dir;
@@ -15,17 +17,21 @@ std::vector<std::pair<float, char*> > performSearch(MultiSearch* ms,
     std::string folderString(folder);
     folderString += "/";
     std::vector<std::pair<float, char*> > files;
+    // Check to make sure folder can be opened
     if ((dir = opendir(folder)) != NULL){
         std::string fileNameString;
         char* fileName;
         float occurrences;
         unsigned int length;
+        // Iterate folder contents
         while ((ent = readdir(dir)) != NULL){
             fileName = ent->d_name;
             fileNameString = std::string(fileName);
+            // Ignore the folder and its parent
             if (fileNameString != "." && fileNameString != ".."){
                 fileNameString = folderString + fileNameString;
                 occurrences = ms->performSearch(fileNameString.c_str());
+                // Only keep the file if it contains all terms
                 if (occurrences){
                     length = strlen(fileName);
                     char* fileNameDyn = new char[length+1];
@@ -41,6 +47,7 @@ std::vector<std::pair<float, char*> > performSearch(MultiSearch* ms,
     return files;
 }
 
+// Sorter used to sort first according to occurrences, secord lexicagraphically
 bool filesorter(std::pair<float, char*> a, std::pair<float, char*> b){
     if (a.first > b.first){
         return true;
@@ -52,6 +59,7 @@ bool filesorter(std::pair<float, char*> a, std::pair<float, char*> b){
     }
 }
 
+// Print all the matching files
 void printResults(std::vector<std::pair<float, char*> > vector){
     std::sort(vector.begin(), vector.end(), filesorter);
     std::vector<std::pair<float, char*> >::iterator it;
@@ -68,6 +76,7 @@ int main(int argc, char** argv){
         char* folder = argv[1];
         char* indexFile = argv[2];
         int sSize = 20;
+        // Solution doesn't use an index
         if (std::string(argv[3]) == "-s"){
             std::stringstream(argv[4]) >> sSize;
             argv += 2;

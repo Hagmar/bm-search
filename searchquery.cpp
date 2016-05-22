@@ -47,13 +47,15 @@ void SearchQuery::search(unsigned char* text, unsigned int textLength, unsigned 
         bcTable[pattern[j]][j] = -textLength-1;
         while ((i += j-bcTable[trans[text[i+j]]][j]) < textLength-length);
 
+        // Restore BC-table
+        bcTable[pattern[j]][j] = tempBCEntry;
+
         // Check if end of text has been reached
         if (i < textLength+1){
             break;
         }
 
-        // Restore BC-table and i
-        bcTable[pattern[length-1]][j] = tempBCEntry;
+        // Restore i
         i -= j + textLength + 1;
 
         // Check for match at position i
